@@ -158,7 +158,8 @@ shell.runStatement = function() {
   }
 
   var statement = document.getElementById('statement');
-  req.onreadystatechange = function() { shell.done(req, statement.value); };
+  var sent = statement.value;
+  req.onreadystatechange = function() { shell.done(req, sent); };
 
   // build the query parameter string
   var params = '';
