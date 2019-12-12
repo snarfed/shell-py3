@@ -1,0 +1,7 @@
+google-cloud-error-reporting
+google-cloud-ndb
+google-cloud-tasks
+gunicorn
+jinja2
+requests
+webapp2>=3.0.0b1

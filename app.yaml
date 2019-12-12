@@ -1,0 +1,16 @@
+# https://cloud.google.com/appengine/docs/standard/python/config/appref
+
+# application: shell-hrd
+# version: 1
+runtime: python37
+entrypoint: gunicorn -b :$PORT shell:application
+
+handlers:
+- url: /static
+  static_dir: static
+  secure: always
+  expiration: 1d
+
+- url: .*
+  script: auto
+  secure: always
