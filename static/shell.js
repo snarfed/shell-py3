@@ -69,7 +69,6 @@ shell.getXmlHttpRequest = function() {
  * @return {Boolean} false to tell the browser not to submit the form.
  */
 shell.onPromptKeyPress = function(event) {
-  console.log('in!');
   var statement = document.getElementById('statement');
 
   if (this.historyCursor == this.history.length - 1) {
@@ -80,14 +79,13 @@ shell.onPromptKeyPress = function(event) {
 
   // should we pull something from the history?
   console.log(event);
-  if (event.ctrlKey && (event.keyCode == 38 ||
-                        event.keyCode == 63232) /* up arrow */) {
+  if (event.key == 'ArrowUp' && (event.ctrlKey || event.metaKey)) {
     if (this.historyCursor > 0) {
       statement.value = this.history[--this.historyCursor];
     }
     return false;
-  } else if (event.ctrlKey && (event.keyCode == 40 ||
-                               event.keyCode == 63233) /* down arrow */) {
+  } else
+  if (event.key == 'ArrowDown' && (event.ctrlKey || event.metaKey)) {
     if (this.historyCursor < this.history.length - 1) {
       statement.value = this.history[++this.historyCursor];
     }
@@ -95,11 +93,12 @@ shell.onPromptKeyPress = function(event) {
   } else if (!event.altKey) {
     // probably changing the statement. update it in the history.
     this.historyCursor = this.history.length - 1;
-    this.history[this.historyCursor] = statement.value;
+    this.history[this.historyCursor] = statement.value.trimEnd();
   }
 
   // should we submit?
-  if (event.keyCode == 13 /* enter */ && !event.altKey && !event.shiftKey) {
+  if (event.key == 'Enter' && !event.altKey && !event.shiftKey) {
+    statement.value = statement.value.trimEnd();
     return this.runStatement();
   }
 };

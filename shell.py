@@ -42,6 +42,7 @@ INITIAL_UNPICKLABLES = (
   'import logging',
   'import os',
   'import sys',
+  'import requests',
   'from google.cloud import ndb',
 )
 
