@@ -78,7 +78,6 @@ shell.onPromptKeyPress = function(event) {
   }
 
   // should we pull something from the history?
-  console.log(event);
   if (event.key == 'ArrowUp' && (event.ctrlKey || event.metaKey)) {
     if (this.historyCursor > 0) {
       statement.value = this.history[--this.historyCursor];
